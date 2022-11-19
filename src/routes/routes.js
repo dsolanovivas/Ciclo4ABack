@@ -68,7 +68,7 @@ router.route("/borrar-estudiante/:id").delete((req, res, next) => {
   });
 });
 
-//Obtener un Estudante
+//Obtener un Estudiante
 router.route("/obtener-estudiante/:id").get((req, res, next) => {
   estudianteSchema.findById(req.params.id, (error, data) => {
     if (error) {
@@ -96,3 +96,5 @@ router.route("/busqueda-estudiante/:texto").get((req, res, next) => {
     }
   );
 });
+
+module.exports = router;
