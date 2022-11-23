@@ -1,3 +1,5 @@
+require("./config/config");
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -18,18 +20,18 @@ mongoose
   .catch((err) => console.log(err));
 
 //configuraciones
-app.set("port", process.env.PORT || 4000);
+app.set("port", process.env.PORT);
 
 //middleware
-app.use(morgan("dev"));
+//app.use(morgan("dev"));
 //app.use(express.urlencoded({ extended: false }));
 //app.use(express.json());
 
-//parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-
 //parse application/json
 app.use(bodyParser.json());
+
+//parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //Respuesta a Navegador
 app.get("/", (req, res) => {
@@ -38,6 +40,7 @@ app.get("/", (req, res) => {
   });
 });
 
+//app.use(cors());
 app.use("/APIRESTCICLO4A", backRoutes);
 
 //iniciando Servidor
