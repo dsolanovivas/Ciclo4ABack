@@ -146,4 +146,34 @@ router.route("/refresh").post((req, res, next) => {
   });
 });
 
+router.route("/verify").post((req, res, next) => {
+  let token = req.body.token;
+
+  if (!token) {
+    return res.status(400).json({
+      ok: false,
+      error: {
+        msg: "Token no enviado",
+      },
+    });
+  }
+
+  // Verificar el token
+  jwt.verify(token, process.env.SEED_AUTENTICACION, (err, decoded) => {
+    if (err) {
+      return res.status(406).json({
+        ok: false,
+        error: {
+          msg: "No autorizado",
+        },
+      });
+    }
+
+    res.status(200).json({
+      ok: true,
+      token: token,
+    });
+  });
+});
+
 module.exports = router;

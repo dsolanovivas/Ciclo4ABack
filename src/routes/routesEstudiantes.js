@@ -88,7 +88,14 @@ router.route("/obtener-estudiante/:id").get((req, res, next) => {
 //Busqueda de Estudiantes
 router.route("/busqueda-estudiante/:texto").get((req, res, next) => {
   estudianteSchema.find(
-    { nombre: { $regex: req.params.texto } },
+    {
+      $or: [
+        { nombre: { $regex: req.params.texto } },
+        { email: { $regex: req.params.texto } },
+        { cedula: { $regex: req.params.texto } },
+      ],
+    },
+    //{ nombre: { $regex: req.params.texto } },
     (error, data) => {
       if (error) {
         console.log(error);
