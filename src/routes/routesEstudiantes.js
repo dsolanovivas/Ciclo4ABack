@@ -32,8 +32,8 @@ router.route("/listar-estudiantes").get((req, res, next) => {
         res.json(data);
       }
     })
-    .sort({ nombre: -1 })
-    .limit(2);
+    .sort({ nombre: 1 });
+  //.limit(2);
 });
 
 //Actualizar Estudiantes
@@ -90,9 +90,9 @@ router.route("/busqueda-estudiante/:texto").get((req, res, next) => {
   estudianteSchema.find(
     {
       $or: [
-        { nombre: { $regex: req.params.texto } },
-        { email: { $regex: req.params.texto } },
-        { cedula: { $regex: req.params.texto } },
+        { nombre: { $regex: req.params.texto, $options: "i" } },
+        { email: { $regex: req.params.texto, $options: "i" } },
+        { cedula: { $regex: req.params.texto, $options: "i" } },
       ],
     },
     //{ nombre: { $regex: req.params.texto } },
