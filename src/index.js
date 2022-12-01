@@ -11,7 +11,7 @@ const app = express();
 const backRoutes = require("./routes/routes");
 
 //DB Config
-const db = require("./database/db").mongoURILocal;
+const db = require("./database/db").mongoURI;
 
 //Conectar con la base de datos
 mongoose
